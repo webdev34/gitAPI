@@ -1,0 +1,44 @@
+<div class="searchContainer" ng-hide="searchStart">
+
+  <div class="row">
+    <label>Enter a GitHub Username</label>
+    <br/>
+    <div class="input-group-btn">
+      <form>
+      <input type="text" class="form-control gitReposInput" placeholder="Search" ng-model="gitRepos">
+      <button class="btn btn-primary gitReposSearchBtn" type="submit" ng-click="startUsernameSearch()" ng-disabled="gitRepos.length == '0' || gitRepos == ''">
+        <i class="glyphicon glyphicon-search"></i>
+      </button>
+    </form>
+    </div>
+  </div>
+
+</div>
+
+<div class="searchContainer" ng-show="searchStart">
+  <div class="row clearfix">
+    <label>Filter Results: </label>  <input type="text" data-ng-model="search.$">
+    <button class="btn btn-success gitReposSearchBtn pull-right" type="submit" ng-click="newSearch();">
+      <span>New Search</span> <i class="glyphicon glyphicon-search"></i>
+    </button>
+  </div>
+  <table class="table table-striped table-bordered text-center">
+     <thead>
+       <tr>
+          <th class="text-center">Avatar</th>
+          <th class="text-center">Date Created</th>
+          <th class="text-center">Description</th>
+          <th class="text-center">Full Name</th>
+       </tr>
+
+     </thead
+     <tbody>
+       <tr ng-repeat="value in value | filter:search">
+           <td><img src="{{value.owner.avatar_url}}" width="50" /></td>
+           <td>{{value.created_at | date}}</td>
+           <td>{{value.description}}</td>
+           <td><a href="{{value.html_url}}" target="_blank">{{value.full_name}}</a></td>
+       </tr>
+    </tbody>
+  </table>
+</div>
