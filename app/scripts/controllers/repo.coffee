@@ -13,3 +13,7 @@ angular.module('gitApiApp')
     $scope.newSearch = (searchTerm)->
       $scope.gitRepos = ''
       $rootScope.searchStart = false
+
+    $scope.displayUserInfo = (user)->
+      $rootScope.currentUser = user
+      searchAPI.getContributorsRepo(user.login)

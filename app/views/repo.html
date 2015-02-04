@@ -15,17 +15,33 @@
 
 </div>
 
+<button class="btn btn-success gitReposSearchBtn pull-right" type="submit" ng-click="newSearch();" style="margin-bottom: 15px;">
+  <span>New Search</span> <i class="glyphicon glyphicon-search"></i>
+</button>
+<div class="currentUser clearfix" ng-show="currentUser">
+  <div class="pull-left pull-right-5">
+    <a href="{{currentUser.html_url}}" target="_blank">
+      <img src="{{currentUser.avatar_url}}" width="100" height="100" />
+    </a>
+  </div>
+  <p># of contributions: <span>{{currentUser.contributions}}</span></p>
+  <p># of Repos: <span>{{currentContributorsRepos.length}}</span></p>
+  <p>Repos:
+    <label ng-repeat="userInfo in currentContributorsRepos | limitTo: 4">
+      <a href="https://github.com/{{userInfo.full_name}}" target="_blank">{{userInfo.full_name}}</a>
+      <span class="pull-right-5" ng-if="$index < 3 && currentContributorsRepos.length > 1 ">,</span>
+    </label>
+    <span ng-if="currentContributorsRepos.length > 4">...</span>
+  </p>
+</div>
 <div class="searchContainer" ng-show="searchStart">
-  <button class="btn btn-success gitReposSearchBtn pull-right" type="submit" ng-click="newSearch();" style="margin-bottom: 15px;">
-    <span>New Search</span> <i class="glyphicon glyphicon-search"></i>
-  </button>
-
   <table class="table table-striped table-bordered text-center clearfix">
      <thead>
        <tr>
           <th class="text-center">Avatar</th>
           <th class="text-center">Date Created</th>
           <th class="text-center">Description</th>
+          <th class="text-center">Contributors</th>
           <th class="text-center">Full Name</th>
        </tr>
 
@@ -35,6 +51,7 @@
            <td><img src="{{value.owner.avatar_url}}" width="50" /></td>
            <td>{{value.created_at | date}}</td>
            <td>{{value.description}}</td>
+           <td><a class="btn gitUser" ng-click="displayUserInfo(user);" ng-repeat="user in contributors">{{user.login}}</a></td>
            <td><a href="{{value.html_url}}" target="_blank">{{value.full_name}}</a></td>
        </tr>
     </tbody>
