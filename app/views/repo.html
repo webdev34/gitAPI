@@ -15,8 +15,9 @@
 
 </div>
 
-<button class="btn btn-success gitReposSearchBtn pull-right" type="submit" ng-click="newSearch();" style="margin-bottom: 15px;">
-  <span>New Search</span> <i class="glyphicon glyphicon-search"></i>
+<button class="btn btn-success gitReposSearchBtn pull-right" type="submit" ng-click="newSearch();" style="margin-bottom: 15px;" ng-show="searchStart">
+  <span>New Search</span>
+  <i class="glyphicon glyphicon-search"></i>
 </button>
 <div class="currentUser clearfix" ng-show="currentUser">
   <div class="pull-left pull-right-5">
